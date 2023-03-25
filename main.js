@@ -1,14 +1,16 @@
 import './style.css'
-import _ from "underscore"
+import { crearDeck } from "./src/blackjack/usecases/crear-deck"
+import { pedirCarta } from './src/blackjack/usecases/pedir-carta';
+import { valorCarta } from './src/blackjack/usecases/valor-carta';
 
 
-let deck = [];
+export let deck    = [];
 const tipos = ['C', 'D', 'H', 'S'],
-  especiales = ['A', 'J', 'Q', 'K'];
+especiales  = ['A', 'J', 'Q', 'K'];
 
 let puntosJugadores = [];
 
-// Referencias del HTML
+//*Referencias del HTML
 const btnPedir = document.querySelector('#btnPedir'),
   btnDetener = document.querySelector('#btnDetener'),
   btnNuevo = document.querySelector('#btnNuevo');
@@ -19,7 +21,7 @@ const divCartasJugadores = document.querySelectorAll('.divCartas'),
 
 // Esta función inicializa el juego 
 const inicializarJuego = (numJugadores = 2) => {
-  deck = crearDeck();
+  deck = crearDeck(tipos, especiales);
 
   puntosJugadores = [];
   for (let i = 0; i < numJugadores; i++) {
@@ -34,38 +36,9 @@ const inicializarJuego = (numJugadores = 2) => {
 
 }
 
-// Esta función crea un nuevo deck
-const crearDeck = () => {
-
-  deck = [];
-  for (let i = 2; i <= 10; i++) {
-    for (let tipo of tipos) {
-      deck.push(i + tipo);
-    }
-  }
-
-  for (let tipo of tipos) {
-    for (let esp of especiales) {
-      deck.push(esp + tipo);
-    }
-  }
-  return _.shuffle(deck);;
-}
-
+// Esta función crea un nuevo dec
 // Esta función me permite tomar una carta
-const pedirCarta = () => {
-  if (deck.length === 0) {
-    throw 'No hay cartas en el deck';
-  }
-  return deck.pop();
-}
 
-const valorCarta = (carta) => {
-  const valor = carta.substring(0, carta.length - 1);
-  return (isNaN(valor)) ?
-    (valor === 'A') ? 11 : 10
-    : valor * 1;
-}
 
 // Turno: 0 = primer jugador y el último será la computadora
 const acumularPuntos = (carta, turno) => {
