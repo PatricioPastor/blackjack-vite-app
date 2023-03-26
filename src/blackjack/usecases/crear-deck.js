@@ -1,5 +1,4 @@
 import _ from "underscore"
-import { deck } from "../../../main"
 
 export const crearDeck = (tiposCartas, tiposEspeciales) => {
 

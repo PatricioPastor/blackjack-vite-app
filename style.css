@@ -23,13 +23,17 @@ body {
   font-size: 25px;
 }
 
+h1 {
+  font-size: 32px;
+}
+
 .carta {
   position: relative;
-  width: 150px;
+  width: 120px;
   left: 100px;
   margin-left: -75px;
 }
 
 #computadora-cartas, #jugador-cartas {
-  height: 240px;
+  height: 200px;
 }
